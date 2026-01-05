@@ -1,0 +1,5 @@
+define service ZUI_NEWREASONCODE {
+  expose ZC_NEWREASONCODE_S as NewReasonCodeAll;
+  expose ZC_NEWREASONCODE as NewReasonCode;
+  expose ZC_NEWREASONCODETEXT as NewReasonCodeText;
+}

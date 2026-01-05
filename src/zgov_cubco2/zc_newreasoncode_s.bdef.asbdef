@@ -1,0 +1,42 @@
+projection implementation in class ZBP_C_NEWREASONCODE_S unique;
+strict;
+use draft;
+
+define behavior for ZC_NewReasonCode_S alias NewReasonCodeAll
+
+{
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+  use action SelectCustomizingTransptReq;
+
+  use association _NewReasonCode { create ( augment ); with draft; }
+}
+
+define behavior for ZC_NewReasonCode alias NewReasonCode
+
+{
+  field ( modify )
+   Description;
+
+
+  use update( augment );
+  use delete;
+
+  use action CopyNewReasonCode;
+
+  use association _NewReasonCodeAll { with draft; }
+  use association _NewReasonCodeText { create; with draft; }
+}
+
+define behavior for ZC_NewReasonCodeText alias NewReasonCodeText
+
+{
+  use update;
+  use delete;
+
+  use association _NewReasonCodeAll { with draft; }
+  use association _NewReasonCode { with draft; }
+}

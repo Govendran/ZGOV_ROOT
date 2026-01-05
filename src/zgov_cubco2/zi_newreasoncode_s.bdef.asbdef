@@ -1,0 +1,103 @@
+managed with additional save implementation in class ZBP_I_NEWREASONCODE_S unique;
+strict;
+with draft;
+
+define behavior for ZI_NewReasonCode_S alias NewReasonCodeAll
+draft table ZGOV_RCODES2_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+
+{
+  field ( readonly )
+   SingletonID;
+
+
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _NewReasonCode { create ( features : instance ); with draft; }
+}
+
+define behavior for ZI_NewReasonCode alias NewReasonCode
+persistent table ZGOV_RCODES2
+draft table ZGOV_RCODES2_D
+etag master LocalLastChangedAt
+lock dependent by _NewReasonCodeAll
+authorization dependent by _NewReasonCodeAll
+
+{
+  field ( mandatory : create )
+   Rcode;
+
+  field ( readonly )
+   SingletonID,
+   LastChangedAt,
+   LocalLastChangedAt;
+
+  field ( readonly : update )
+   Rcode;
+
+
+  update( features : global );
+  delete( features : global );
+
+  factory action ( features : instance ) CopyNewReasonCode parameter ZD_CopyNewReasonCodeP [1];
+
+  mapping for ZGOV_RCODES2
+  {
+    Rcode = RCODE;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _NewReasonCodeAll { with draft; }
+  association _NewReasonCodeText { create ( features : global ); with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}
+
+define behavior for ZI_NewReasonCodeText alias NewReasonCodeText
+persistent table ZGOV_RCODES_T2
+draft table ZGOV_RCODES_T2_D
+etag master LocalLastChangedAt
+lock dependent by _NewReasonCodeAll
+authorization dependent by _NewReasonCodeAll
+
+{
+  field ( mandatory : create )
+   Langu;
+
+  field ( readonly )
+   SingletonID,
+   Rcode,
+   LocalLastChangedAt;
+
+  field ( readonly : update )
+   Langu;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZGOV_RCODES_T2
+  {
+    Langu = LANGU;
+    Rcode = RCODE;
+    Description = DESCRIPTION;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _NewReasonCodeAll { with draft; }
+  association _NewReasonCode { with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}

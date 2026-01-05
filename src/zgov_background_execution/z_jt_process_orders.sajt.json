@@ -1,0 +1,23 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "Job Template for order processing",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "catalogName": "Z_CE_PROCESS_ORDERS"
+  },
+  "parameters": {
+    "singleValueParameters": [
+      {
+        "name": "P_EBELN",
+        "value": ""
+      },
+      {
+        "name": "P_UUID",
+        "value": ""
+      }
+    ]
+  }
+}

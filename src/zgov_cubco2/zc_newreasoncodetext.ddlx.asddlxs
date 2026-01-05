@@ -1,0 +1,39 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'NewReasonCodeText', 
+    typeNamePlural: 'NewReasonCodeTexts', 
+    title: {
+      type: #STANDARD, 
+      label: 'New Reason Code Text', 
+      value: 'Langu'
+    }
+  }
+}
+annotate view ZC_NewReasonCodeText with
+{
+  @UI.facet: [ {
+    id: 'ZI_NewReasonCodeText', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'New Reason Code Text', 
+    position: 1 
+  } ]
+  @UI.identification: [ {
+    position: 1 , 
+    label: 'Langu'
+  } ]
+  @UI.lineItem: [ {
+    position: 1 , 
+    label: 'Langu'
+  } ]
+  Langu;
+  
+  @UI.identification: [ {
+    position: 2 
+  } ]
+  @UI.lineItem: [ {
+    position: 2 
+  } ]
+  Description;
+}

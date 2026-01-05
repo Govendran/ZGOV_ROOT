@@ -1,0 +1,50 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'ReasonCode', 
+    typeNamePlural: 'ReasonCodes', 
+    title: {
+      type: #STANDARD, 
+      label: 'Reason Code', 
+      value: 'Rcode'
+    }
+  }
+}
+annotate view ZC_ReasonCode with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  } ]
+  @UI.facet: [ {
+    id: 'ZI_ReasonCode', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Reason Code', 
+    position: 1 
+  }, 
+  {
+    id: 'ZI_ReasonCodeText', 
+    type: #LINEITEM_REFERENCE, 
+    label: 'Reason Code Text', 
+    position: 2 , 
+    targetElement: '_ReasonCodeText'
+  } ]
+  Rcode;
+  
+  @UI.identification: [ {
+    position: 3 
+  } ]
+  LastChangedAt;
+  
+  @UI.identification: [ {
+    hidden: true, 
+    position: 2 
+  } ]
+  @UI.lineItem: [ {
+    position: 2 
+  } ]
+  Description;
+}

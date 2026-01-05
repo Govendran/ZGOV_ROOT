@@ -1,0 +1,5 @@
+define service ZUI_REASONCODE {
+  expose ZC_REASONCODE_S as ReasonCodeAll;
+  expose ZC_REASONCODE as ReasonCode;
+  expose ZC_REASONCODETEXT as ReasonCodeText;
+}

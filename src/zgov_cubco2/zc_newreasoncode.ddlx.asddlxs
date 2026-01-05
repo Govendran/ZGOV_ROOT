@@ -1,0 +1,56 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'NewReasonCode', 
+    typeNamePlural: 'NewReasonCodes', 
+    title: {
+      type: #STANDARD, 
+      label: 'New Reason Code', 
+      value: 'Rcode'
+    }
+  }
+}
+annotate view ZC_NewReasonCode with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  }, 
+  {
+    type: #FOR_ACTION, 
+    dataAction: 'CopyNewReasonCode', 
+    label: 'Copy Selected Entry', 
+    invocationGrouping: #CHANGE_SET
+  } ]
+  @UI.facet: [ {
+    id: 'ZI_NewReasonCode', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'New Reason Code', 
+    position: 1 
+  }, 
+  {
+    id: 'ZI_NewReasonCodeText', 
+    type: #LINEITEM_REFERENCE, 
+    label: 'New Reason Code Text', 
+    position: 2 , 
+    targetElement: '_NewReasonCodeText'
+  } ]
+  Rcode;
+  
+  @UI.identification: [ {
+    position: 3 
+  } ]
+  LastChangedAt;
+  
+  @UI.identification: [ {
+    hidden: true, 
+    position: 2 
+  } ]
+  @UI.lineItem: [ {
+    position: 2 
+  } ]
+  Description;
+}
